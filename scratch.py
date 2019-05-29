@@ -37,7 +37,7 @@ def first_page(urls):
                 f.write(resp.content)
 
 def other_page(urls):
-        link="".join(url).split('.')[-1]
+        link="".join(url).split('.html')[0]
         i=2
         links="https://www.24fa.top/{}p{}.html".format(link,i)
         urls=[]
