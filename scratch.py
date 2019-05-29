@@ -33,7 +33,7 @@ def first_page(urls):
             resp=requests.get(url,headers={"User-Agent": UserAgent(verify_ssl=False).random})
             time.sleep(6)
             path="".join(url).split('/')[-1]
-            with open("D:\\美图\\"+ path,'wb+') as f:
+            with open("D:\\"+ path,'wb+') as f:
                 f.write(resp.content)
 
 def other_page(urls):
@@ -54,7 +54,7 @@ def other_page(urls):
                 resp = requests.get(url, headers={"User-Agent": UserAgent(verify_ssl=False).random})
                 time.sleep(6)
                 path = "".join(url).split('/')[-1]
-                with open("D:\\美图\\" + path, 'wb+') as f:
+                with open("D:\\" + path, 'wb+') as f:
                     f.write(resp.content)
 
 if __name__=='__main__':
