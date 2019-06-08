@@ -47,7 +47,6 @@ def down_img(imgsurl):
             with open("***"+path,"wb+") as f:
                 time.sleep(3)
                 f.write(resp.content)
-                time.sleep(3)
 
 if __name__=='__main__':
     url="https://www.24fa.top/MeiNv/"
