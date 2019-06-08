@@ -2,6 +2,7 @@ import requests
 from fake_useragent import UserAgent
 from lxml import etree
 
+# get first page image's url
 def get_url(url):
     response=requests.get(url,headers={"User-Agent": UserAgent(verify_ssl=False).random}).text
     e=etree.HTML(response)
@@ -14,6 +15,7 @@ def get_url(url):
         urls.append(last_url)
     return urls
 
+# Get all image url
 def parse_url(pages):
     all_url=[]
     for page in pages:
@@ -27,6 +29,7 @@ def parse_url(pages):
             all_url.append(last_page)
     return all_url
 
+# Down image
 def down_img(imgsurl):
     num = 0
     for imgurl in imgsurl:
@@ -40,14 +43,15 @@ def down_img(imgsurl):
                 links="https://www.24fa.top"+link
                 resp=requests.get(links,headers={"User-Agent": UserAgent(verify_ssl=False).random})
                 if resp.status_code==200:
-                    with open("D:\\meitu\\"+path,"wb+") as f:
-                        print("正在下载第%s张"%num)
+                    # Input file path
+                    with open("*****"+path,"wb+") as f:
+                        print("Loading No.%s"%num)
                         f.write(resp.content)
                         num+=1
                 else:
-                    print("图片加载失败")
+                    print("Image loading fail")
         else:
-            print("遇到广告页")
+            print("Advertisement")
 
 if __name__=='__main__':
     url="https://www.24fa.top/MeiNv/"
