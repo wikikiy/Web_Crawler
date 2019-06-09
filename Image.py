@@ -42,14 +42,11 @@ def down_img(imgsurl):
                 path="".join(imglink).split("/")[-1]
                 links="https://www.24fa.top"+link
                 resp=requests.get(links,headers={"User-Agent": UserAgent(verify_ssl=False).random})
-                if resp.status_code==200:
                     # Input file path
-                    with open("*****"+path,"wb+") as f:
-                        print("Loading No.%s"%num)
-                        f.write(resp.content)
-                        num+=1
-                else:
-                    print("Image loading fail")
+                with open("*****"+path,"wb+") as f:
+                    print("Loading No.%s"%num)
+                    f.write(resp.content)
+                    num+=1
         else:
             print("Advertisement")
 
