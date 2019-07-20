@@ -4,7 +4,7 @@ from lxml import etree
 import os
 
 def Goods_img(e):
-    base_path='C://Users//Wiki//Desktop//商品图片'
+    base_path='D://商品图片//展示图片//'
     img_urls=e.xpath('//li/div[@class="thumbnail"]/a/@href')
     num=1
     for image in img_urls:
@@ -14,7 +14,7 @@ def Goods_img(e):
         try:
             if not os.path.exists(base_path):
                 os.makedirs(base_path)
-            with open(base_path+"//"+"单品"+str(num)+'.'+img_name,'wb+') as f:
+            with open(base_path+str(num)+'.'+img_name,'wb+') as f:
                 num+=1
                 f.write(resp.content)
         except:
@@ -22,17 +22,17 @@ def Goods_img(e):
 
 def Attribute_img(e):
     # img_urls=e.xpath('//div[@id="product_detail"]/div[2]/div/div//img/@src')
-    base_path='C://Users//Wiki//Desktop//商品图片'
+    base_path='D://商品图片//详情图片//'
     img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
     num=1
-    for img in img_urls:
+    for img in img_urls[3:]:
         path="".join(img).split('?')[0]
         resp=requests.get(path,headers={"User-Agent":UserAgent(verify_ssl=False).random})
         names = "".join(path).split('.')[-1]
         try:
             if not os.path.exists(base_path):
                 os.makedirs(base_path)
-            with open(base_path+"//"+"属性"+str(num)+'.'+names,'wb+') as f:
+            with open(base_path+str(num)+'.'+names,'wb+') as f:
                 num+=1
                 f.write(resp.content)
         except:
