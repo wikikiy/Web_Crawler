@@ -21,7 +21,6 @@ def Goods_img(e):
             print("出现问题")
 
 def Attribute_img(e):
-    # img_urls=e.xpath('//div[@id="product_detail"]/div[2]/div/div//img/@src')
     base_path='D://商品图片//详情图片//'
     img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
     num=1
