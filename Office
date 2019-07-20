@@ -1,0 +1,28 @@
+import requests
+from fake_useragent import UserAgent
+from lxml import etree
+
+def Goods_img(e):
+    img_urls=e.xpath('//li/div[@class="thumbnail"]/a/@href')
+    for image in img_urls:
+        img_path="".join(image).split('?')[0]
+        resp=requests.get(img_path,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+        img_name="".join(img_path).split('/')[-1]
+        with open("C://Users//Wiki//Desktop//商品图片//"+img_name,'wb+') as f:
+            f.write(resp.content)
+
+def Attribute_img(e):
+    img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
+    for img in img_urls:
+        path="".join(img).split('?')[0]
+        resp=requests.get(path,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+        names="".join(path).split('/')[-1]
+        with open("C://Users//Wiki//Desktop//商品图片//"+"属性"+names,'wb+') as f:
+            f.write(resp.content)
+            
+if __name__=='__main__':
+    url=str(input("输入商品的网址："))
+    response = requests.get(url, headers={"User-Agent": UserAgent(verify_ssl=False).random})
+    e = etree.HTML(response.text)
+    Goods_img(e)
+    Attribute_img(e)
