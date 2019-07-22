@@ -1,0 +1,21 @@
+from tkinter import *
+import requests
+from fake_useragent import UserAgent
+
+root = Tk()
+l1 = Label(root, text="输入网址：")
+l1.pack() #这里的side可以赋值为LEFT  RTGHT TOP  BOTTOM
+xls_text = StringVar()
+xls = Entry(root, textvariable = xls_text)
+xls_text.set(" ")
+xls.pack()
+
+def on_click():
+    x = xls_text.get()
+    return x
+
+Button(root,text="开始获取",command=root.quit).pack()
+root.mainloop()
+url=on_click()
+resp=requests.get(url,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+print(resp.text)
