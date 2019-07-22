@@ -4,7 +4,7 @@ from lxml import etree
 import os
 
 def Goods_img(e):
-    base_path='D://商品图片//展示图片//'
+    base_path='C://Users//Administrator//Desktop//'
     img_urls=e.xpath('//li/div[@class="thumbnail"]/a/@href')
     num=1
     for image in img_urls:
@@ -21,7 +21,7 @@ def Goods_img(e):
             print("出现问题")
 
 def Attribute_img(e):
-    base_path='D://商品图片//详情图片//'
+    base_path='C://Users//Administrator//Desktop//'
     img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
     num=1
     for img in img_urls[3:]:
