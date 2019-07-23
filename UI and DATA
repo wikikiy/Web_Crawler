@@ -5,7 +5,7 @@ import os
 from tkinter import *
 
 def Goods_img(e):
-    base_path='C://Users//Administrator//Desktop//'
+    base_path="C://Users//Administrator//Desktop//商品图片//单品图片//"
     img_urls=e.xpath('//li/div[@class="thumbnail"]/a/@href')
     num=1
     for image in img_urls:
@@ -22,7 +22,7 @@ def Goods_img(e):
             print("出现问题")
 
 def Attribute_img(e):
-    base_path='C://Users//Administrator//Desktop//'
+    base_path="C://Users//Administrator//Desktop//商品图片//商品详情图片//"
     img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
     num=1
     for img in img_urls[3:]:
@@ -37,7 +37,6 @@ def Attribute_img(e):
                 f.write(resp.content)
         except:
             print("出现问题")
-
 
 if __name__=='__main__':
     root = Tk()
