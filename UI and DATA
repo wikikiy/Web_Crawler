@@ -1,0 +1,60 @@
+import requests
+from fake_useragent import UserAgent
+from lxml import etree
+import os
+from tkinter import *
+
+def Goods_img(e):
+    base_path='C://Users//Administrator//Desktop//'
+    img_urls=e.xpath('//li/div[@class="thumbnail"]/a/@href')
+    num=1
+    for image in img_urls:
+        img_path="".join(image).split('?')[0]
+        resp=requests.get(img_path,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+        img_name="".join(img_path).split('.')[-1]
+        try:
+            if not os.path.exists(base_path):
+                os.makedirs(base_path)
+            with open(base_path+str(num)+'.'+img_name,'wb+') as f:
+                num+=1
+                f.write(resp.content)
+        except:
+            print("出现问题")
+
+def Attribute_img(e):
+    base_path='C://Users//Administrator//Desktop//'
+    img_urls=e.xpath('//div[@style="max-width: 740px;"]//img/@src')
+    num=1
+    for img in img_urls[3:]:
+        path="".join(img).split('?')[0]
+        resp=requests.get(path,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+        names = "".join(path).split('.')[-1]
+        try:
+            if not os.path.exists(base_path):
+                os.makedirs(base_path)
+            with open(base_path+str(num)+'.'+names,'wb+') as f:
+                num+=1
+                f.write(resp.content)
+        except:
+            print("出现问题")
+
+
+if __name__=='__main__':
+    root = Tk()
+    l1 = Label(root, text="输入网址：")
+    l1.pack()
+    xls_text = StringVar()
+    xls = Entry(root, textvariable = xls_text)
+    xls_text.set(" ")
+    xls.pack()
+    def on_click():
+        x = xls_text.get()
+        return x
+    Button(root,text="开始获取",command=root.quit).pack()
+    root.mainloop()
+    url=on_click()
+    resp=requests.get(url,headers={"User-Agent":UserAgent(verify_ssl=False).random})
+    response = requests.get(url, headers={"User-Agent": UserAgent(verify_ssl=False).random})
+    e = etree.HTML(response.text)
+    Goods_img(e)
+    Attribute_img(e)
