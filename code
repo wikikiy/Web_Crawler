@@ -1,0 +1,29 @@
+import xlwt
+import requests
+from lxml import etree
+
+a=[]
+url="http://120.221.95.29:8085/gp-webapp-mall/product/search?page={}&display=1&preOptionString=01_*_04_547EAECE95E30F8BE053BE0CA8C0C28E&preSortString="
+workbook = xlwt.Workbook(encoding = 'utf-8')
+worksheet = workbook.add_sheet('My Worksheet')
+for i in range(1,214):
+	s_url=url.format(i)
+	cookies={
+		"JSESSIONID":"5446BC0B6FDC7F01EF82F78A80791AAD",
+	}
+	# proxy={
+    #     "118.113.247.230:9999",
+    # }
+	headers={
+		"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3100.0 Safari/537.36",
+	}
+	response=requests.get(s_url,cookies=cookies,headers=headers)
+	e=etree.HTML(response.text)
+	good_bns=e.xpath('//div[@class="item"]/input[@id="skuId"]/@value')
+	for good_bn in good_bns:
+		a.append(good_bn)
+n=1
+for goods in a:
+	worksheet.write(n,0, label = goods)
+	n+=1
+workbook.save("C://Users//Administrator//Desktop//Excel_test.xls")
