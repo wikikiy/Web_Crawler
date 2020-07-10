@@ -11,9 +11,6 @@ for i in range(1,214):
 	cookies={
 		"JSESSIONID":"5446BC0B6FDC7F01EF82F78A80791AAD",
 	}
-	# proxy={
-    #     "118.113.247.230:9999",
-    # }
 	headers={
 		"User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3100.0 Safari/537.36",
 	}
