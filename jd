@@ -1,0 +1,9 @@
+import requests,json,time,re
+
+url="https://item.jd.com/100006085277.html"
+bn=re.findall(r'/(.\d*).',url)[1]
+jdurl="http://p.3.cn/prices/mgets?skuIds={}"
+bnurl=jdurl.format(bn)
+response=requests.get(bnurl)
+print(response.text)
+print(type(response.text))
